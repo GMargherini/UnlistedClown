@@ -6,7 +6,7 @@ public class FileManager {
 	String path;
 	String fileName;
 	String separator;
-	public FileManager(String fileName){
+	public FileManager(String fileName){ //nome del file al quale accedere senza estensione
 		this.fileName=fileName;
 		this.path=getPath();
 	}
@@ -25,7 +25,7 @@ public class FileManager {
 		}
 		return file;
 	}
-	public String[] read(int line){
+	public String[] read(int line){ //Linea da leggere
 		String row;
 		String[][] data=null;
 		int i=0;
@@ -48,7 +48,7 @@ public class FileManager {
 		}
 		return null;
 	}
-	public void write(String[] input){
+	public void write(String[] input){ //dati da inserire
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
 			for(int i=0;i<input.length;i++){
@@ -60,7 +60,7 @@ public class FileManager {
 			System.out.print(e);
 		}
 	}
-	public int getLineCount(){
+	public int getLineCount(){ //numero linee nel file
 		int i=0;
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(getFile()));
