@@ -1,4 +1,3 @@
-package gruppo.progetto;
 import java.io.*;
 
 
