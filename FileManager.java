@@ -6,7 +6,7 @@ public class FileManager {
 	String path;
 	String fileName;
 	String separator;
-	public FileManager(String fileName){ //nome del file al quale accedere senza estensione
+	public FileManager(String fileName){ //fileName: nome del file al quale accedere senza estensione
 		this.fileName=fileName;
 		this.path=getPath();
 	}
@@ -48,7 +48,7 @@ public class FileManager {
 		}
 		return null;
 	}
-	public void write(String[] input){ //dati da inserire
+	public void write(String[] input){ //input: dati da inserire
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
 			for(int i=0;i<input.length;i++){
