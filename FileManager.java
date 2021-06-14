@@ -1,3 +1,4 @@
+package gruppo.progetto;
 import java.io.*;
 
 
@@ -5,6 +6,7 @@ public class FileManager {
 	File file;
 	String path;
 	String fileName;
+	String separator;
 	public FileManager(String fileName){
 		this.fileName=fileName;
 		this.path=getPath();
@@ -24,20 +26,20 @@ public class FileManager {
 		}
 		return file;
 	}
-	public String[] read(int l){
+	public String[] read(int line){
 		String row;
 		String[][] data=null;
 		int i=0;
 		try{
 			data=new String[getLineCount()][10];
 			i=0;
-			BufferedReader csvReader=new BufferedReader(new FileReader(getFile()));
-			while (( row = csvReader.readLine()) != null) {
+			BufferedReader br=new BufferedReader(new FileReader(getFile()));
+			while (( row = br.readLine()) != null) {
     			data[i] = row.split(",");
 				i++;
 			}
-			csvReader.close();
-			return data[l];
+			br.close();
+			return data[line];
 		}
 		catch(IOException e1){
 			System.out.print(e1);
@@ -47,10 +49,12 @@ public class FileManager {
 		}
 		return null;
 	}
-	public void write(String str){
+	public void write(String[] input){
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
-			bw.write(str);
+			for(int i=0;i<input.length;i++){
+				bw.write(input[i]+",");
+			}
 			bw.close();
 		}
 		catch(IOException e){
@@ -60,8 +64,8 @@ public class FileManager {
 	public int getLineCount(){
 		int i=0;
 		try{
-		BufferedReader csvReader = new BufferedReader(new FileReader(getFile()));
-			while ((csvReader.readLine()) != null){
+			BufferedReader br = new BufferedReader(new FileReader(getFile()));
+			while ((br.readLine()) != null){
 				i++;
 			}
 		}
