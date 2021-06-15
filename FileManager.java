@@ -8,7 +8,7 @@ public class FileManager {
 	String fileName;
 	String separator;
 	
-	public FileManager(String fileName){
+	public FileManager(String fileName){ //fileName: nome del file a cui accedere senza estensione
 		this.fileName=fileName;
 		this.path=getPath();
 	}
@@ -31,16 +31,17 @@ public class FileManager {
 		return file;
 	}
 	
-	public String[] read(int line){
+	public String[] read(int line){ //line: riga del file da leggere
 		String row;
-		String[] data=null;
-		int i=0;
 		try{
-			data=new String[10];
-			i=0;
+			String[] data=null;
+			int i=0;
 			BufferedReader br=new BufferedReader(new FileReader(getFile()));
-			while (( row = br.readLine()) != null && i<=line) {
-    			data = row.split(",");
+			while (( row = br.readLine()) != null) {
+				if(i==line){
+					data = row.split(",");
+					break;
+				}
 				i++;
 			}
 			br.close();
@@ -49,13 +50,10 @@ public class FileManager {
 		catch(IOException e1){
 			System.out.print(e1);
 		}
-		catch(ArrayIndexOutOfBoundsException e2){
-			System.out.print("Linea non valida\n");
-		}
 		return null;
 	}
 	
-	public void write(String[] input){
+	public void write(String[] input){ //input: dati da scrivere su file
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
 			for(int i=0;i<input.length;i++){
