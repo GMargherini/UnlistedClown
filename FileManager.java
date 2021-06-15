@@ -1,3 +1,4 @@
+package gruppo.progetto;
 import java.io.*;
 
 
@@ -7,7 +8,7 @@ public class FileManager {
 	String fileName;
 	String separator;
 	
-	public FileManager(String fileName){ //fileName: nome del file al quale accedere senza estensione
+	public FileManager(String fileName){
 		this.fileName=fileName;
 		this.path=getPath();
 	}
@@ -30,20 +31,20 @@ public class FileManager {
 		return file;
 	}
 	
-	public String[] read(int line){ //Linea da leggere
+	public String[] read(int line){
 		String row;
-		String[][] data=null;
+		String[] data=null;
 		int i=0;
 		try{
-			data=new String[getLineCount()][10];
+			data=new String[10];
 			i=0;
 			BufferedReader br=new BufferedReader(new FileReader(getFile()));
-			while (( row = br.readLine()) != null) {
-    			data[i] = row.split(",");
+			while (( row = br.readLine()) != null && i<=line) {
+    			data = row.split(",");
 				i++;
 			}
 			br.close();
-			return data[line];
+			return data;
 		}
 		catch(IOException e1){
 			System.out.print(e1);
@@ -54,7 +55,7 @@ public class FileManager {
 		return null;
 	}
 	
-	public void write(String[] input){ //input: dati da inserire
+	public void write(String[] input){
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
 			for(int i=0;i<input.length;i++){
@@ -67,7 +68,7 @@ public class FileManager {
 		}
 	}
 	
-	public int getLineCount(){ //numero linee nel file
+	public int getLineCount(){
 		int i=0;
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(getFile()));
