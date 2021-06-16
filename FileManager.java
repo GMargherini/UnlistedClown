@@ -58,6 +58,7 @@ public class FileManager {
 			for(int i=0;i<input.length;i++){
 				bw.write(input[i]+",");
 			}
+			bw.write("\n");
 			bw.close();
 		}
 		catch(IOException e){
