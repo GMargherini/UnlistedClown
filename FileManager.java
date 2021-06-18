@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 
 public class FileManager {
@@ -10,6 +11,7 @@ public class FileManager {
 	public FileManager(String fileName){ //fileName: nome del file a cui accedere senza estensione
 		this.fileName=fileName;
 		this.path=getPath();
+		this.file=getFile();
 	}
 	
 	private String getPath(){
@@ -18,16 +20,36 @@ public class FileManager {
 	}
 	
 	private File getFile(){
-		file=new File(path);
-		if(!file.exists()){
-			try{
-				file.createNewFile();
+		File f=new File(path);
+		if(!f.exists()){
+			System.out.print("File non trovato, creare "+fileName+".dati ? (s/n) ");
+			Scanner sc=new Scanner(System.in);
+			String ans=sc.nextLine().toLowerCase();
+			while(!ans.equals("s")&&!ans.equals("n")){
+				System.out.print("Input non valido, creare "+fileName+".dati ? (s/n) ");
+				ans=sc.next().toLowerCase();
 			}
-			catch(IOException e){
-				System.out.print(e);
+			if(ans.equals("s")){
+				f=newFile();
+				System.out.print("File creato\n");
+			}
+			else if(ans.equals("n")){
+				f=null;
+				System.out.print("File non creato\n");
 			}
 		}
-		return file;
+		return f;
+	}
+	
+	private File newFile(){
+		File f=new File(path);
+		try{
+			f.createNewFile();
+		}
+		catch(IOException e){
+			System.out.print(e);
+		}
+		return f;
 	}
 	
 	public String[] read(int line){ //line: riga del file da leggere
@@ -35,7 +57,7 @@ public class FileManager {
 		try{
 			String[] data=null;
 			int i=0;
-			BufferedReader br=new BufferedReader(new FileReader(getFile()));
+			BufferedReader br=new BufferedReader(new FileReader(file));
 			while (( row = br.readLine()) != null) {
 				if(i==line){
 					data = row.split(",");
@@ -49,12 +71,15 @@ public class FileManager {
 		catch(IOException e1){
 			System.out.print(e1);
 		}
+		catch(NullPointerException e1){
+			System.out.print("File non trovato");
+		}
 		return null;
 	}
 	
 	public void write(String[] input){ //input: dati da scrivere su file
 		try{
-			BufferedWriter bw=new BufferedWriter(new FileWriter(getFile(),true));
+			BufferedWriter bw=new BufferedWriter(new FileWriter(file,true));
 			for(int i=0;i<input.length;i++){
 				bw.write(input[i]+",");
 			}
@@ -64,12 +89,15 @@ public class FileManager {
 		catch(IOException e){
 			System.out.print(e);
 		}
+		catch(NullPointerException e1){
+			System.out.print("File non trovato");
+		}
 	}
 	
 	public int getLineCount(){
 		int i=0;
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(getFile()));
+			BufferedReader br = new BufferedReader(new FileReader(file));
 			while ((br.readLine()) != null){
 				i++;
 			}
@@ -77,6 +105,10 @@ public class FileManager {
 		catch(IOException e){
 			System.out.print(e);
 		}
+		catch(NullPointerException e1){
+			System.out.print("File non trovato");
+		}
 		return i;
 	}
+	
 }
