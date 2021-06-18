@@ -41,7 +41,7 @@ public class FileManager {
 		return f;
 	}
 	
-	private File newFile(){
+	public File newFile(){
 		File f=new File(path);
 		try{
 			f.createNewFile();
@@ -72,7 +72,7 @@ public class FileManager {
 			System.out.print(e1);
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato");
+			System.out.print("File non trovato\n");
 		}
 		return null;
 	}
@@ -90,7 +90,7 @@ public class FileManager {
 			System.out.print(e);
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato");
+			System.out.print("File non trovato\n");
 		}
 	}
 	
@@ -106,7 +106,7 @@ public class FileManager {
 			System.out.print(e);
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato");
+			System.out.print("File non trovato\n");
 		}
 		return i;
 	}
