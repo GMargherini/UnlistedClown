@@ -56,23 +56,6 @@ public class FileManager {
 		return f;
 	}
 	
-	public String[] getFileList(){ //Restituisce un vettore con i nomi di tutti i file nella cartella
-		String[] files=file.list();
-		return files;
-	}
-	public void selectFile(){
-		System.out.print("Quale file selezionare? ");
-		Scanner sc=new Scanner(System.in);
-		String ans=sc.nextLine();
-		path=getPath()+ans;
-		file=new File(path);
-		if (file.exists()){
-			deleteFile();
-		}
-		else{
-			file=getFile(ans);
-		}
-	}
 	public void deleteFile(){
 		if(file.exists()){
 			System.out.print("Eliminare "+file.getName()+" ? (s/n) ");
@@ -89,6 +72,24 @@ public class FileManager {
 			else if(ans.equals("n")){
 				System.out.print("File non eliminato\n");
 			}
+		}
+	}
+	
+	public String[] getFileList(){ //Restituisce un vettore con i nomi di tutti i file nella cartella
+		return file.list();
+	}
+	
+	public void selectFile(){
+		System.out.print("Quale file selezionare? ");
+		Scanner sc=new Scanner(System.in);
+		String ans=sc.nextLine();
+		path=getPath()+ans;
+		file=new File(path);
+		if (file.exists()){
+			deleteFile();
+		}
+		else{
+			file=getFile(ans);
 		}
 	}
 	
