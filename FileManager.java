@@ -1,7 +1,6 @@
 package FileManager;
-import java.io.*;
-import java.util.*;
 
+import java.io.*;
 
 public class FileManager {
 	File file;
@@ -30,21 +29,10 @@ public class FileManager {
 	private File getFile(String name){
 		File f=new File(path);
 		if(!f.exists()){
-			System.out.print("File non trovato, creare "+name+" ? (s/n) ");
-			Scanner sc=new Scanner(System.in);
-			String ans=sc.nextLine().toLowerCase();
-			while(!ans.equals("s")&&!ans.equals("n")){
-				System.out.print("Input non valido, creare "+name+" ? (s/n) ");
-				ans=sc.next().toLowerCase();
-			}
-			if(ans.equals("s")){
-				f=newFile(name);
-				System.out.print("File creato\n");
-			}
-			else if(ans.equals("n")){
-				f=null;
-				System.out.print("File non creato\n");
-			}
+			f=newFile(name);
+		}
+		else{
+			System.out.print("file "+name+" non trovato");
 		}
 		return f;
 	}
@@ -61,22 +49,10 @@ public class FileManager {
 		}
 		return f;
 	}
-	public void deleteFile(){
-		if(file.exists()){
-			System.out.print("Eliminare "+fileName+" ? (s/n) ");
-			Scanner sc=new Scanner(System.in);
-			String ans=sc.nextLine().toLowerCase();
-			while(!ans.equals("s")&&!ans.equals("n")){
-				System.out.print("Input non valido, eliminare "+fileName+" ? (s/n) ");
-				ans=sc.next().toLowerCase();
-			}
-			if(ans.equals("s")){
-				file.delete();
-				System.out.print("File eliminato\n");
-			}
-			else if(ans.equals("n")){
-				System.out.print("File non eliminato\n");
-			}
+	public void deleteFile(String name){
+		File f=new File(getFilePath(name));
+		if(f.exists()){
+			f.delete();
 		}
 	}
 	
@@ -84,17 +60,11 @@ public class FileManager {
 		String[] files=file.list();
 		return files;
 	}
-	public void selectFile(){
-		System.out.print("Quale file selezionare? ");
-		Scanner sc=new Scanner(System.in);
-		String ans=sc.nextLine();
-		path=getFilePath(ans);
-		file=new File(path);
-		if (file.exists()){
-			deleteFile();
+	public File selectFile(String name){
+		File f=new File(getFilePath(name));
+		if (!f.exists()){
+			f=getFile(name);
 		}
-		else{
-			file=getFile(ans);
-		}
+		return f;
 	}
 }
