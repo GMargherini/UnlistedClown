@@ -49,16 +49,6 @@ public class FileManager {
 		return f;
 	}
 	
-//	private File newFile(){
-//		File f=new File(path);
-//		try{
-//			f.createNewFile();
-//		}
-//		catch(IOException e){
-//			System.out.print(e);
-//		}
-//		return f;
-//	}
 	public File newFile(String name){
 		File f=new File(getFilePath(name));
 		if(!f.exists()){
@@ -107,7 +97,4 @@ public class FileManager {
 			file=getFile(ans);
 		}
 	}
-	
-	
-	
 }
