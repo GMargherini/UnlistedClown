@@ -90,7 +90,7 @@ public class DataManager {
 		return read(getLineCount()-1)[0];
 	}
 	
-	public int getLine(String id){
+	public int getLine(String id){ //restituisce la linea in cui compare id
 		int i=0,j;
 		String row;
 		try{
