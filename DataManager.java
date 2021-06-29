@@ -87,7 +87,31 @@ public class DataManager {
 	}
 	
 	public String lastID(){
-		String[] row=read(getLineCount()-1);
-		return row[0];
+		return read(getLineCount()-1)[0];
+	}
+	
+	public int getLine(String id){
+		int i=0,j;
+		String row;
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while ((row=br.readLine()) != null){
+				i++;
+				j=row.indexOf(',');
+				if(row.substring(0,j).equals(id)){
+					return i;
+				}
+			}
+		}
+		catch(IOException e){
+			System.out.print(e);
+		}
+		catch(NullPointerException e1){
+			System.out.print("File non trovato\n");
+		}
+		catch(IndexOutOfBoundsException e2){
+			System.out.print("Errore nella lettura del file");
+		}
+		return i;
 	}
 }
