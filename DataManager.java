@@ -102,6 +102,7 @@ public class DataManager {
 					return i;
 				}
 			}
+			return -1;
 		}
 		catch(IOException e){
 			System.out.print(e);
