@@ -96,11 +96,11 @@ public class DataManager {
 		try{
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while ((row=br.readLine()) != null){
-				i++;
 				j=row.indexOf(',');
 				if(row.substring(0,j).equals(id)){
 					return i;
 				}
+				i++;
 			}
 			return -1;
 		}
