@@ -10,16 +10,18 @@ public class DataManager {
 	}
 	
 	private String[] split(String str){
-		String[] data=new String[6];
-		String[] split;
-		int i;
+		int i,count=0;
+		for(i=0;i<str.length();i++){
+			if(str.charAt(i)==(',')){
+				count++;
+			}
+		}
+		String[] data=new String[count+1];
 		StringTokenizer st=new StringTokenizer(str,",");
 		for(i=0;st.hasMoreTokens();i++){
 			data[i]=st.nextToken();
 		}
-		split=new String[i];
-		System.arraycopy(data, 0, split, 0, i);
-		return split;
+		return data;
 	}
 	
 	public String[] read(int line){ //line: riga del file da leggere
