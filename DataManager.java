@@ -1,7 +1,6 @@
 package FileManager;
 
 import java.io.*;
-import java.util.*;
 
 public class DataManager {
 	File file;
@@ -10,24 +9,28 @@ public class DataManager {
 	}
 	
 	private String[] split(String str){
-		int i,count=0;
+		int i,index,num=0;
 		for(i=0;i<str.length();i++){
 			if(str.charAt(i)==(',')){
-				count++;
+				num++;
 			}
 		}
-		String[] data=new String[count+1];
-		StringTokenizer st=new StringTokenizer(str,",");
-		for(i=0;st.hasMoreTokens();i++){
-			data[i]=st.nextToken();
-		}
+		String[] data=new String[num+1];
+			for(i=0;i<num;i++){
+				index=str.indexOf(',');
+				if(index>0){
+					data[i]=str.substring(0,index);
+					str=str.substring(index+1,str.length());
+				}
+			}
+			data[num]=str;
 		return data;
 	}
 	
 	public String[] read(int line){ //line: riga del file da leggere
 		String row;
 		try{
-			String[] data=null;
+			String[] data;
 			int i=0;
 			BufferedReader br=new BufferedReader(new FileReader(file));
 			if(line==0){
@@ -45,7 +48,7 @@ public class DataManager {
 			return data;
 		}
 		catch(IOException e1){
-			System.out.print(e1);
+			System.out.print("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
 			System.out.print("Fine file superata\n");
@@ -64,7 +67,7 @@ public class DataManager {
 			bw.close();
 		}
 		catch(IOException e){
-			System.out.print(e);
+			System.out.print("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
 			System.out.print("File non trovato\n");
@@ -80,7 +83,7 @@ public class DataManager {
 			}
 		}
 		catch(IOException e){
-			System.out.print(e);
+			System.out.print("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
 			System.out.print("File non trovato\n");
@@ -92,7 +95,7 @@ public class DataManager {
 		return read(getLineCount()-1)[0];
 	}
 	
-	public int getLine(String id){ //restituisce la linea in cui compare id
+	public int getLine(String id){
 		int i=0,j;
 		String row;
 		try{
@@ -107,7 +110,7 @@ public class DataManager {
 			return -1;
 		}
 		catch(IOException e){
-			System.out.print(e);
+			System.out.print("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
 			System.out.print("File non trovato\n");
