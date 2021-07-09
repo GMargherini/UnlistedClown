@@ -118,6 +118,6 @@ public class DataManager {
 		catch(IndexOutOfBoundsException e2){
 			System.out.print("Errore nella lettura del file");
 		}
-		return i;
+		return -1;
 	}
 }
