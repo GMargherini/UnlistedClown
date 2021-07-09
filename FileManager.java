@@ -31,9 +31,6 @@ public class FileManager {
 		if(!f.exists()){
 			f=newFile(name);
 		}
-		else{
-			System.out.print("file "+name+" non trovato");
-		}
 		return f;
 	}
 	
