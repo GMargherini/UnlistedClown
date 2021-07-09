@@ -120,4 +120,29 @@ public class DataManager {
 		}
 		return -1;
 	}
+	
+	public String[] firstColumn(){
+		int i=0,j;
+		String row;
+		String[] data= new String[getLineCount()];
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while ((row=br.readLine()) != null){
+				j=row.indexOf(',');
+				data[i]=row.substring(0,j);
+				i++;
+			}
+			return data;
+		}
+		catch(IOException e){
+			System.out.print("Errore di Input/Output");
+		}
+		catch(NullPointerException e1){
+			System.out.print("File non trovato\n");
+		}
+		catch(IndexOutOfBoundsException e2){
+			System.out.print("Errore nella lettura del file");
+		}
+		return data;
+	}
 }
