@@ -48,10 +48,10 @@ public class DataManager {
 			return data;
 		}
 		catch(IOException e1){
-			System.out.print("Errore di Input/Output");
+			System.out.println("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
-			System.out.print("Fine file superata\n");
+			System.out.println("Fine file superata");
 		}
 		return null;
 	}
@@ -67,10 +67,10 @@ public class DataManager {
 			bw.close();
 		}
 		catch(IOException e){
-			System.out.print("Errore di Input/Output");
+			System.out.println("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato\n");
+			System.out.println("File non trovato");
 		}
 	}
 	
@@ -83,10 +83,10 @@ public class DataManager {
 			}
 		}
 		catch(IOException e){
-			System.out.print("Errore di Input/Output");
+			System.out.println("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato\n");
+			System.out.println("File non trovato");
 		}
 		return i;
 	}
@@ -110,13 +110,13 @@ public class DataManager {
 			return -1;
 		}
 		catch(IOException e){
-			System.out.print("Errore di Input/Output");
+			System.out.println("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato\n");
+			System.out.println("File non trovato");
 		}
 		catch(IndexOutOfBoundsException e2){
-			System.out.print("Errore nella lettura del file");
+			System.out.println("Errore nella lettura del file");
 		}
 		return -1;
 	}
@@ -135,13 +135,13 @@ public class DataManager {
 			return data;
 		}
 		catch(IOException e){
-			System.out.print("Errore di Input/Output");
+			System.out.println("Errore di Input/Output");
 		}
 		catch(NullPointerException e1){
-			System.out.print("File non trovato\n");
+			System.out.println("File non trovato");
 		}
 		catch(IndexOutOfBoundsException e2){
-			System.out.print("Errore nella lettura del file");
+			System.out.println("Errore nella lettura del file");
 		}
 		return data;
 	}
