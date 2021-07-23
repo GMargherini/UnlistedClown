@@ -4,11 +4,19 @@ import java.io.*;
 
 public class DataManager {
 	File file;
+	
 	public DataManager(FileManager fm){
-		file=fm.file;
+		try{
+			file=fm.file;
+			if(!file.exists())
+				throw new FileNotFoundException();
+		}
+		catch(FileNotFoundException e){
+			System.out.println("File non trovato");
+		}
 	}
 	
-	private String[] split(String str){
+	private static String[] split(String str){
 		int i,index,num=0;
 		for(i=0;i<str.length();i++){
 			if(str.charAt(i)==(',')){
@@ -27,7 +35,8 @@ public class DataManager {
 		return data;
 	}
 	
-	public String[] read(int line){ //line: riga del file da leggere
+	//restituisce la riga numero "line"
+	public String[] read(int line){ 
 		String row;
 		try{
 			String[] data;
@@ -55,8 +64,9 @@ public class DataManager {
 		}
 		return null;
 	}
-
-	public void write(String[] input){ //input: dati da scrivere su file
+	
+	//scrive il contenuto di "input" alla fine del file
+	public void write(String[] input){ 
 		int len=input.length;
 		try{
 			BufferedWriter bw=new BufferedWriter(new FileWriter(file,true));
@@ -74,6 +84,68 @@ public class DataManager {
 		}
 	}
 	
+	//se "append" è true aggiunge il contenuto di "input" alla riga "line", altrimenti la riscrive
+	public void writeInLine(String[] input, int line, Boolean append){
+		int len=input.length-1,i=0;
+		String row;
+		try{
+			BufferedReader br=new BufferedReader(new FileReader(file));
+			StringBuilder sb=new StringBuilder();
+			while (( row=br.readLine()) != null ) {
+				if(append || i!=line){
+					sb.append(row);
+				}
+				if(i==line){
+					if(append)
+						sb.append(",");
+					for( int j=0;j<len;j++){
+						sb.append(input[j]);
+						sb.append(",");
+					}
+					sb.append(input[len]);
+				}
+				sb.append("\n");
+				i++;
+			}
+			BufferedWriter bw=new BufferedWriter(new FileWriter(file,false));
+			bw.write(sb.toString());
+			bw.close();
+		}
+		catch(IOException e){
+			System.out.println("Errore di Input/Output");
+		}
+		catch(NullPointerException e1){
+			System.out.println("File non trovato");
+		}
+	}
+	
+	//cancella la riga numero "line"
+	public void deleteLine(int line){
+		int i=0;
+		String row;
+		try{
+			BufferedReader br=new BufferedReader(new FileReader(file));
+			StringBuilder sb=new StringBuilder();
+			while (( row=br.readLine()) != null ) {
+				if(i!=line){
+					sb.append(row);
+					sb.append("\n");
+				}
+				i++;
+			}
+			BufferedWriter bw=new BufferedWriter(new FileWriter(file,false));
+			bw.write(sb.toString());
+			bw.close();
+		}
+		catch(IOException e){
+			System.out.println("Errore di Input/Output");
+		}
+		catch(NullPointerException e1){
+			System.out.println("File non trovato");
+		}
+	}
+	
+	//restituisce il numero di righe nel file
 	public int getLineCount(){
 		int i=0;
 		try{
@@ -91,10 +163,12 @@ public class DataManager {
 		return i;
 	}
 	
+	//restituisce il primo elemento dell'ultima riga
 	public String lastID(){
 		return read(getLineCount()-1)[0];
 	}
 	
+	//restituisce il numero della riga in cui si trova "id"
 	public int getLine(String id){
 		int i=0,j;
 		String row;
@@ -121,6 +195,7 @@ public class DataManager {
 		return -1;
 	}
 	
+	//restituisce la prima colonna del file
 	public String[] firstColumn(){
 		int i=0,j;
 		String row;
