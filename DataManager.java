@@ -47,7 +47,7 @@ public class DataManager {
 	/**
 	 * <p>Restituisce la riga specificata come array di <code>String</code><p/>
 	 * @param line Il numero della riga da leggere
-	 * @return Un array di <code>String</code> contenente la riga scelta
+	 * @return Un array di <code>String</code> contenente la riga specificata
 	 */
 	public String[] read(int line){ 
 		String row;
