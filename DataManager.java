@@ -2,9 +2,18 @@ package FileManager;
 
 import java.io.*;
 
+/**
+ * <p>Permette di eseguire operazioni sui dati di un file</p>
+ * @author Giorgio Margherini
+ */
+
 public class DataManager {
 	File file;
 	
+	/**
+	 * <p>Inizializza un nuovo <code>DataManager</code> relativo al file indicato da <code>FileManager</code></p>
+	 * @param fm Il FileManager relativo al file su cui lavorare
+	 */
 	public DataManager(FileManager fm){
 		try{
 			file=fm.file;
@@ -16,7 +25,7 @@ public class DataManager {
 		}
 	}
 	
-	private static String[] split(String str){
+	private String[] split(String str){
 		int i,index,num=0;
 		for(i=0;i<str.length();i++){
 			if(str.charAt(i)==(',')){
@@ -35,7 +44,11 @@ public class DataManager {
 		return data;
 	}
 	
-	//restituisce la riga numero "line"
+	/**
+	 * <p>Restituisce la riga specificata come array di <code>String</code><p/>
+	 * @param line Il numero della riga da leggere
+	 * @return Un array di <code>String</code> contenente la riga scelta
+	 */
 	public String[] read(int line){ 
 		String row;
 		try{
@@ -65,7 +78,10 @@ public class DataManager {
 		return null;
 	}
 	
-	//scrive il contenuto di "input" alla fine del file
+	/**
+	 * <p>Aggiunge <code>input</code> come ultima riga del file
+	 * @param input La riga da scrivere
+	 */
 	public void write(String[] input){ 
 		int len=input.length;
 		try{
@@ -83,8 +99,14 @@ public class DataManager {
 			System.out.println("File non trovato");
 		}
 	}
-	
-	//se "append" è true aggiunge il contenuto di "input" alla riga "line", altrimenti la riscrive
+	//Mettere un valore univoco come primo elemento (nome centro vaccinale, userid...)
+
+	/**
+	 * <p>Scrive <code>input</code> sulla riga <code>line</code></p>
+	 * @param input La riga da scrivere
+	 * @param line Il numero della riga su cui scrivere
+	 * @param append se true input è aggiunto alla fine della riga altrimenti la riga viene sovrascritta
+	 */
 	public void writeInLine(String[] input, int line, Boolean append){
 		int len=input.length-1,i=0;
 		String row;
@@ -119,7 +141,10 @@ public class DataManager {
 		}
 	}
 	
-	//cancella la riga numero "line"
+	/**
+	 * <p>Elimina la riga <code>line<code><p/>
+	 * @param line Il numero della riga da cancellare
+	 */
 	public void deleteLine(int line){
 		int i=0;
 		String row;
@@ -145,7 +170,10 @@ public class DataManager {
 		}
 	}
 	
-	//restituisce il numero di righe nel file
+	/**
+	 * <p>Restituisce il numero di righe nel file (comprese le righe vuote)</p>
+	 * @return Il numero di righe nel file
+	 */
 	public int getLineCount(){
 		int i=0;
 		try{
@@ -163,12 +191,19 @@ public class DataManager {
 		return i;
 	}
 	
-	//restituisce il primo elemento dell'ultima riga
+	/**
+	 * <p>Restituisce l'elemento identificativo dell'ultima riga del file</p>
+	 * @return Il primo elemento dell'ultima riga
+	 */
 	public String lastID(){
 		return read(getLineCount()-1)[0];
 	}
 	
-	//restituisce il numero della riga in cui si trova "id"
+	/**
+	 * <p>Restituisce la posizione della riga identificata da <code>id</code>
+	 * @param id Valore identificativo della riga
+	 * @return Il numero della riga in cui si trova <code>id</code>
+	 */
 	public int getLine(String id){
 		int i=0,j;
 		String row;
@@ -195,7 +230,10 @@ public class DataManager {
 		return -1;
 	}
 	
-	//restituisce la prima colonna del file
+	/**
+	 * <p>Restituisce il primo elemento di ogni riga del file come array di <code>String<code></p>
+	 * @return La prima colonna del file
+	 */
 	public String[] firstColumn(){
 		int i=0,j;
 		String row;
