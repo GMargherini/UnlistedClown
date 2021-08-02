@@ -3,7 +3,7 @@ package FileManager;
 import java.io.*;
 
 /**
- * <p>Permette di accedere a dei file</p>
+ * <p>Permette di accedere ad un file</p>
  * @author Giorgio Margherini
  */
 
