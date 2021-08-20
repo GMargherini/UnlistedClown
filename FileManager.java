@@ -3,7 +3,7 @@ package FileManager;
 import java.io.*;
 
 /**
- * <p>Permette di accedere ad un file</p>
+ * <p>Permette di accedere a dei file</p>
  * @author Giorgio Margherini
  */
 
@@ -31,21 +31,32 @@ public class FileManager {
 		this.file=getFile("");
 	}
 	
+	/**
+	 * <p>Restituisce il path della cartella "data"</p>
+	 * @return Il percorso della cartella
+	 */
 	private String getDirectoryPath(){
 		separator=File.separator;
 		return ".."+separator+"data"+separator;
 	}
 	
+	/**
+	 * <p>Restituisce il percorso del file selezionato</p>
+	 * @param name Il nome del file di cui si vuole ottenere il percorso
+	 * @return Il percorso del file
+	 */
 	private String getFilePath(String name){
 		separator=File.separator;
-		
 		return ".."+separator+"data"+separator+name+".dati";
 	}
+	
+	/**
+	 * <p>Restituisce il file selezionato</p>
+	 * @param name Il nome del file a cui accedere
+	 * @return Il file selezionato
+	 */
 	private File getFile(String name){
-		File f=new File(path);
-		if(!f.exists()){
-			f=newFile(name);
-		}
+		File f=newFile(name);
 		return f;
 	}
 	
@@ -106,5 +117,15 @@ public class FileManager {
 			this.fileName=name;
 			this.path=getFilePath(name);
 		}
+	}
+	
+	/**
+	 * <p>Controlla se il file selezionato esiste</p>
+	 * @param name File da controllare
+	 * @return <code>true</code> se il file esiste, <code>false</code> altrimenti
+	 */
+	public Boolean esiste(String name){
+		File f=new File(getFilePath(name));
+		return f.exists();
 	}
 }
