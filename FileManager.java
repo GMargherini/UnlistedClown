@@ -124,7 +124,7 @@ public class FileManager {
 	 * @param name File da controllare
 	 * @return <code>true</code> se il file esiste, <code>false</code> altrimenti
 	 */
-	public static Boolean esiste(String name){
+	public Boolean esiste(String name){
 		File f=new File(getFilePath(name));
 		return f.exists();
 	}
