@@ -231,6 +231,38 @@ public class DataManager {
 	}
 	
 	/**
+	 * <p>Restituisce il numero della prima riga che ha valore <code>id</code> nella colonna <code>col</code>, a partire dalla posizione <code>from</code></p>
+	 * @param id Valore da trovare
+	 * @param col Colonna in cui si trova il
+	 * @param from Punto da cui iniziare la ricerca
+	 * @return 
+	 */
+	public int getLine(String id,int col,int from){
+		int i=0;
+		String row;
+		try{
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			while ((row=br.readLine()) != null){
+				if(split(row)[col].equals(id) && i>from){
+					return i;
+				}
+				i++;
+			}
+			return -1;
+		}
+		catch(IOException e){
+			System.out.println("Errore di Input/Output");
+		}
+		catch(NullPointerException e1){
+			System.out.println("File non trovato");
+		}
+		catch(IndexOutOfBoundsException e2){
+			System.out.println("Errore nella lettura del file");
+		}
+		return -1;
+	}
+	
+	/**
 	 * <p>Restituisce il primo elemento di ogni riga del file come array di <code>String<code></p>
 	 * @return La prima colonna del file
 	 */
