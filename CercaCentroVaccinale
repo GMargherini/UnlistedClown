@@ -15,7 +15,12 @@ public class CercaCentroVaccinale {
 
         if (scelta==1) {
 
-            System.out.println("Inserisci il nome del centro vaccinale: ");
+            String[] vetprima = file_centri_op.firstColumn(); //variabile di supporto
+
+			for(int i=0; i<vetprima.length; i++)
+				System.out.println(vetprima[i]);
+                
+            System.out.println("Inserisci il nome del centro vaccinale tra quelli elencati: ");
             String nome_centro = input.nextLine();
 
             int line_nome_centri = file_centri_op.getLine(nome_centro);
