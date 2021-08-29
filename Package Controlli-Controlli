@@ -90,7 +90,7 @@ public class Controlli {
 	 */
 	public static String province() {
 		String s;
-		FileManager temp = new FileManager("CentriVaccinali");
+		FileManager temp = new FileManager();
 		if(!temp.esiste("Province")) {
 			FileManager file_province = new FileManager("Province");
 			DataManager file_province_op = new DataManager(file_province);
