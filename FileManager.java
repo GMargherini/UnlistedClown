@@ -8,13 +8,25 @@ import java.io.*;
  */
 
 public class FileManager {
-	File file;
-	String path;
-	String fileName;
-	String separator;
+	/**
+	 * File a cui ha accesso il <code>FileManager</code>
+	 */
+	private File file;
+	/**
+	 * Stringa contenente il percorso del file
+	 */
+	private String path;
+	/**
+	 * Nome del file senza estensione
+	 */
+	private String fileName;
+	/**
+	 * Separatore del path
+	 */
+	private String separator;
 	
 	/**
-	 * <p>Inizzializza un <code>FileManager</code> relativo al file specificato
+	 * <p>Inizzializza un'istanza di <code>FileManager</code> relativa al file specificato
 	 * @param fileName nome del file a cui accedere (senza estensione)
 	 */
 	public FileManager(String fileName){
@@ -24,11 +36,11 @@ public class FileManager {
 	}
 	
 	/**
-	 *<p>Inizzializza un <code>FileManager</code> relativo alla cartella "data"</p>
+	 *<p>Inizzializza un'istanza di <code>FileManager</code> relativa alla cartella "data"</p>
 	 */
 	public FileManager(){
 		this.path=getDirectoryPath();
-		this.file=getFile("");
+		this.file=new File(path);
 	}
 	
 	/**
@@ -56,8 +68,17 @@ public class FileManager {
 	 * @return Il file selezionato
 	 */
 	private File getFile(String name){
-		File f=newFile(name);
+		File f=new File(path);
+		if(!f.exists())
+			newFile(name);
 		return f;
+	}
+	/**
+	 * <p>Restituisce il file su cui sta lavorando il <code>FileManager</code></p>
+	 * @return Il file a cui si riferisce il <code>FileManager</code>
+	 */
+	File getFile(){
+		return file;
 	}
 	
 	/**
@@ -67,12 +88,12 @@ public class FileManager {
 	 */
 	public File newFile(String name){
 		File f=new File(getFilePath(name));
-		if(!f.exists()){
+		if(!f.exists()&&!name.equals("")){
 			try{
 				f.createNewFile();
 			}
 			catch(IOException e){
-				System.out.print("Errore nella creazione del file "+name);
+				System.out.println("Errore nella creazione del file "+name);
 			}
 		}
 		return f;
@@ -88,11 +109,8 @@ public class FileManager {
 			f.delete();
 		}
 	}
-	/*Se si elimina un file [NomeCentroVaccinale].dati, ricordare di eliminare la corrispondente linea da "centri vaccinali" con
-		
-		DataManager dm=new DataManager(new FileManager("centri vaccinali"));
-		dm.deleteLine(dm.getLine(name));
-	*/
+	//Se si elimina un file [NomeCentroVaccinale].dati, ricordare di eliminare la corrispondente linea da CentriVaccinali.dati
+
 	
 	/**
 	 * <p>Restituisce il contenuto della cartella "data" come array di <code>String</code></p>
@@ -104,7 +122,6 @@ public class FileManager {
 		return files;
 	}
 	
-	//restituisce il file "name" se esiste
 	/**
 	 * <p>Se esiste, accede al file specificato</p>
 	 * @param name Il nome del file a cui accedere
@@ -120,7 +137,7 @@ public class FileManager {
 	}
 	
 	/**
-	 * <p>Controlla se il file selezionato esiste</p>
+	 * <p>Controlla se il file specificato esiste</p>
 	 * @param name File da controllare
 	 * @return <code>true</code> se il file esiste, <code>false</code> altrimenti
 	 */
