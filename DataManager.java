@@ -8,6 +8,10 @@ import java.io.*;
  */
 
 public class DataManager {
+	
+	/**
+	 * File su cui vengono eseguite le operazioni
+	 */
 	File file;
 	
 	/**
