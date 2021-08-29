@@ -27,7 +27,7 @@ public class CentriVaccinale {
 			}
 		}
 		if(validazione) {
-		new FileManager("Vaccinati_"+ vet[0].replaceAll("\\s+",""));
+		file_centri.newFile("Vaccinati_"+ vet[0].replaceAll("\\s+",""));
 		vet[1] = Controlli.tipocentro();
 		vet[2] = Controlli.province();
 		vet[3] = Controlli.inputstringhe("il comune del centro vaccinale", (byte) 35);
@@ -45,9 +45,7 @@ public class CentriVaccinale {
 	 */
 	public void registraVaccinato() {
 		String[] vet = new String[5]; //gestisce l'input dei dati
-		FileManager primacolonna = new FileManager("CentriVaccinali");
-		DataManager primacolonna_op = new DataManager(primacolonna);
-		String[] vetprima = primacolonna_op.firstColumn(); //variabile di supporto
+		String[] vetprima = file_centri_op.firstColumn(); //variabile di supporto
 		String s; //variabile di supporto
 		boolean exit = true; //variabile di supporto
 		
