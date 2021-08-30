@@ -294,4 +294,23 @@ public class DataManager {
 		}
 		return data;
 	}
+	
+	/**
+	 * <p>Restituisce la colonna specificata come array di <code>String</code></p>
+	 * 
+	 * @param col colonna da leggere
+	 * @return La colonna specificata
+	 */
+	public String[] column(int col){
+		int len=getLineCount();
+		String[][] data= new String[len][19];
+		String[] column=new String[len];
+		for(int i=0;i<len;i++){
+			data[i]=read(i);
+		}
+		for(int i=0;i<len;i++){
+			column[i]=data[i][col];
+		}
+		return column;
+	}
 }
